@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: tc2-monolitico
+  datasource:
+    url: mongodb://user:pass@localhost:27017/monolitco?authSource=admin
