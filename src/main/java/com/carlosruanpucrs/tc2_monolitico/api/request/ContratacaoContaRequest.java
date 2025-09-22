@@ -1,30 +1,29 @@
 package com.carlosruanpucrs.tc2_monolitico.api.request;
 
 import com.carlosruanpucrs.tc2_monolitico.enums.EstadoEnum;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ContratacaoContaRequest {
 
     @NonNull
-    private String numeroDocumento;
+    String numeroDocumento;
     @NonNull
-    private String nomeCliente;
+    String nomeCliente;
     @NonNull
-    private LocalDate dataNascimentoCliente;
+    LocalDate dataNascimentoCliente;
     @NonNull
-    private String cep;
+    String cep;
     @NonNull
-    private String cidade;
+    String cidade;
     @NonNull
-    private EstadoEnum estado;
+    EstadoEnum estado;
     @NonNull
-    private String endereco;
+    String endereco;
 }

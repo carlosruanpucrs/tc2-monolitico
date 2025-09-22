@@ -1,6 +1,17 @@
 package com.carlosruanpucrs.tc2_monolitico.enums;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
+
+@Getter
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public enum TipoMovimentacaoEnum {
 
-    PIX
+    TRANSFERENCIA_INTERNA("TI"),
+    BLOQUEIO_JUD("BJUD");
+
+    final String descricao;
 }

@@ -3,14 +3,17 @@ package com.carlosruanpucrs.tc2_monolitico.service;
 import com.carlosruanpucrs.tc2_monolitico.api.request.ContratacaoContaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ContaResumoResponse;
 import com.carlosruanpucrs.tc2_monolitico.exception.CepInvalidoException;
+import com.carlosruanpucrs.tc2_monolitico.exception.ContaNaoEncontradaException;
 import com.carlosruanpucrs.tc2_monolitico.exception.DocumentoClienteExisteException;
 import com.carlosruanpucrs.tc2_monolitico.exception.MenorIdadeException;
 import com.carlosruanpucrs.tc2_monolitico.mapper.ContaMapper;
+import com.carlosruanpucrs.tc2_monolitico.model.entity.ContaEntity;
 import com.carlosruanpucrs.tc2_monolitico.repository.ContaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
@@ -57,5 +60,14 @@ public class ContaService {
         if (Objects.isNull(cep) || !Pattern.matches("\\d{8}", cep)) {
             throw new CepInvalidoException(cep);
         }
+    }
+
+    public ContaEntity obtemContaPorNumero(Integer numeroConta) {
+        return contaRepository.findContaEntityByNumeroConta(numeroConta)
+                .orElseThrow(() -> new ContaNaoEncontradaException(numeroConta));
+    }
+
+    public void atualizarSaldo(ContaEntity contaEntity) {
+        contaRepository.save(contaEntity);
     }
 }
