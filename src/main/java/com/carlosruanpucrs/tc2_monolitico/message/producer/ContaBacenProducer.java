@@ -15,10 +15,19 @@ public class ContaBacenProducer {
     private final RabbitTemplate rabbitTemplate;
 
     public void enviar(ContaNotificacaoBacenEvent evento) {
-        rabbitTemplate.convertAndSend(
-                RabbitConfig.EXCHANGE_BACEN,
-                RabbitConfig.ROUTING_KEY_BACEN,
-                evento
-        );
+        try {
+            log.info("[RABBITMQ] Enviando notificacao abertua conta ao bacen, payload: {}", evento);
+
+            rabbitTemplate.convertAndSend(
+                    RabbitConfig.CONTAEXCHANGE_BACEN,
+                    RabbitConfig.CONTA_ROUTING_KEY_BACEN,
+                    evento
+            );
+
+            log.info("[RABBITMQ] Notificacao abertua conta ao bacen enviada com sucesso, payload: {}", evento);
+        } catch (RuntimeException e) {
+            log.error("[RABBITMQ] Erro ao notificar abertura de conta ao bacen, erro: {}", e.getMessage());
+            throw e;
+        }
     }
 }
