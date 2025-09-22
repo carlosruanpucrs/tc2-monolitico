@@ -3,7 +3,6 @@ package com.carlosruanpucrs.tc2_monolitico.service;
 import com.carlosruanpucrs.tc2_monolitico.api.request.ContratacaoContaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ContaResumoResponse;
 import com.carlosruanpucrs.tc2_monolitico.exception.CepInvalidoException;
-import com.carlosruanpucrs.tc2_monolitico.exception.ContaExisteException;
 import com.carlosruanpucrs.tc2_monolitico.exception.DocumentoClienteExisteException;
 import com.carlosruanpucrs.tc2_monolitico.exception.MenorIdadeException;
 import com.carlosruanpucrs.tc2_monolitico.mapper.ContaMapper;
@@ -23,15 +22,17 @@ import java.util.regex.Pattern;
 public class ContaService {
 
     private final ContaRepository contaRepository;
+    private final ContaBacenService contaBacenService;
 
     public ContaResumoResponse contratarConta(ContratacaoContaRequest request) {
         var numeroConta = gerarNumeroConta();
         validarDocumentoClienteExistente(request.getNumeroDocumento());
         validarIdadeCliente(request.getDataNascimentoCliente());
         validarCEP(request.getCep());
-        var conta = ContaMapper.map(request, numeroConta);
+        var conta = ContaMapper.mapToContaEntity(request, numeroConta);
         var contaSalva = contaRepository.insert(conta);
-        return ContaMapper.map(contaSalva);
+        contaBacenService.enviarNotificacaoAberturaConta(contaSalva);
+        return ContaMapper.mapToContaResumoResponse(contaSalva);
     }
 
     private Integer gerarNumeroConta() {
