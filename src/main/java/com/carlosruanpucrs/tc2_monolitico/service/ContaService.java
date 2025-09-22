@@ -1,11 +1,10 @@
 package com.carlosruanpucrs.tc2_monolitico.service;
 
 import com.carlosruanpucrs.tc2_monolitico.api.request.ContratacaoContaRequest;
+import com.carlosruanpucrs.tc2_monolitico.api.request.TransferenciaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ContaResumoResponse;
-import com.carlosruanpucrs.tc2_monolitico.exception.CepInvalidoException;
-import com.carlosruanpucrs.tc2_monolitico.exception.ContaNaoEncontradaException;
-import com.carlosruanpucrs.tc2_monolitico.exception.DocumentoClienteExisteException;
-import com.carlosruanpucrs.tc2_monolitico.exception.MenorIdadeException;
+import com.carlosruanpucrs.tc2_monolitico.enums.SituacaoContaEnum;
+import com.carlosruanpucrs.tc2_monolitico.exception.*;
 import com.carlosruanpucrs.tc2_monolitico.mapper.ContaMapper;
 import com.carlosruanpucrs.tc2_monolitico.model.entity.ContaEntity;
 import com.carlosruanpucrs.tc2_monolitico.repository.ContaRepository;
@@ -32,9 +31,12 @@ public class ContaService {
         validarDocumentoClienteExistente(request.getNumeroDocumento());
         validarIdadeCliente(request.getDataNascimentoCliente());
         validarCEP(request.getCep());
+
         var conta = ContaMapper.mapToContaEntity(request, numeroConta);
         var contaSalva = contaRepository.insert(conta);
+
         contaBacenService.enviarNotificacaoAberturaConta(contaSalva);
+
         return ContaMapper.mapToContaResumoResponse(contaSalva);
     }
 
@@ -69,5 +71,17 @@ public class ContaService {
 
     public void atualizarSaldo(ContaEntity contaEntity) {
         contaRepository.save(contaEntity);
+    }
+
+    public void validarSaldoConta(TransferenciaRequest request, ContaEntity contaOrigem) {
+        if (contaOrigem.getSaldo().compareTo(request.getValor()) < 0) {
+            throw new SaldoInsuficienteException(request.getContaOrigem());
+        }
+    }
+
+    public void validarSituacaoContaBloqueada(ContaEntity conta) {
+        if (Objects.equals(conta.getSituacao(), SituacaoContaEnum.BLOQUEADA)) {
+            throw new ContaBloqueadaException(conta.getNumeroConta());
+        }
     }
 }

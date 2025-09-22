@@ -19,7 +19,7 @@ public class ContaApi {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<ContaResumoResponse> contratarConta(@RequestBody ContratacaoContaRequest request){
+    public ResponseEntity<ContaResumoResponse> contratarConta(@RequestBody ContratacaoContaRequest request) {
         return ResponseEntity.ok(contaService.contratarConta(request));
     }
 }

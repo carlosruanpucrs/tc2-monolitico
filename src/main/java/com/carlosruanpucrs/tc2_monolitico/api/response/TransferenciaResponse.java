@@ -1,16 +1,22 @@
 package com.carlosruanpucrs.tc2_monolitico.api.response;
 
+import com.carlosruanpucrs.tc2_monolitico.enums.OperacaoEnum;
+import com.carlosruanpucrs.tc2_monolitico.enums.TipoMovimentacaoEnum;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TransferenciaResponse {
 
     String comprovante;
+    Integer numeroConta;
+    BigDecimal valor;
+    LocalDateTime dataHora;
+    OperacaoEnum operacao;
+    TipoMovimentacaoEnum tipoMovimentacao;
 }

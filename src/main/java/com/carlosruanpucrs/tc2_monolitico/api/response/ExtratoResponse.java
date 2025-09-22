@@ -5,16 +5,13 @@ import lombok.Builder;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ContaResumoResponse {
+public class ExtratoResponse {
 
-    String documentoCliente;
-    String nomeCliente;
-    Integer numeroConta;
-    String situacao;
-    LocalDate dataCriacao;
+    Integer numeroContaOrigem;
     BigDecimal saldo;
+    List<TransferenciaResponse> transferencias;
 }
