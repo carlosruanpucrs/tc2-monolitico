@@ -1,25 +1,29 @@
-package com.carlosruanpucrs.tc2_monolitico.model.dto;
+package com.carlosruanpucrs.tc2_monolitico.model.entity;
 
 import com.carlosruanpucrs.tc2_monolitico.enums.OperacaoEnum;
 import com.carlosruanpucrs.tc2_monolitico.enums.TipoMovimentacaoEnum;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Data
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MovimentacaoFinanceiraDto {
+@Document(collection = "transacoes")
+public class TransacaoEntity {
 
+    @Id
     String comprovante;
-    TipoMovimentacaoEnum tipoMovimentacao;
-    OperacaoEnum operacao;
-    LocalDateTime dataHora;
+
+    Integer contaOrigem;
+    Integer contaDestino;
     BigDecimal valor;
-    Integer numeroContaOrigem;
-    Integer numeroContaDestino;
+    LocalDateTime dataHora;
+    TipoMovimentacaoEnum tipoMovimentacao;
 }

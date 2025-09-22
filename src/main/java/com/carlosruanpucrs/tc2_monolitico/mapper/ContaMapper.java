@@ -2,6 +2,7 @@ package com.carlosruanpucrs.tc2_monolitico.mapper;
 
 import com.carlosruanpucrs.tc2_monolitico.api.request.ContratacaoContaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ContaResumoResponse;
+import com.carlosruanpucrs.tc2_monolitico.enums.SituacaoContaEnum;
 import com.carlosruanpucrs.tc2_monolitico.message.event.ContaNotificacaoBacenEvent;
 import com.carlosruanpucrs.tc2_monolitico.model.entity.ContaEntity;
 
@@ -18,7 +19,7 @@ public class ContaMapper {
                 .numeroConta(numeroConta)
                 .dataCriacao(LocalDate.now())
                 .saldo(BigDecimal.ZERO)
-                .situacao("ATIVADA")
+                .situacao(SituacaoContaEnum.ATIVA)
                 .build();
     }
 

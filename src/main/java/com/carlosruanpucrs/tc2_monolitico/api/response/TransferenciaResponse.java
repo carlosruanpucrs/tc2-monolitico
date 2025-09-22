@@ -6,19 +6,11 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ContaResumoResponse {
+public class TransferenciaResponse {
 
-    String documentoCliente;
-    String nomeCliente;
-    Integer numeroConta;
-    String situacao;
-    LocalDate dataCriacao;
-    BigDecimal saldo;
+    String comprovante;
 }
