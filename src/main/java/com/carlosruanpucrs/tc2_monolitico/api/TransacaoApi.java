@@ -1,7 +1,7 @@
 package com.carlosruanpucrs.tc2_monolitico.api;
 
 import com.carlosruanpucrs.tc2_monolitico.api.request.TransferenciaRequest;
-import com.carlosruanpucrs.tc2_monolitico.api.response.TransferenciaResponse;
+import com.carlosruanpucrs.tc2_monolitico.api.response.ComprovanteResponse;
 import com.carlosruanpucrs.tc2_monolitico.service.TransacaoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ public class TransacaoApi {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<TransferenciaResponse> transferir(@RequestBody TransferenciaRequest request) {
+    public ResponseEntity<ComprovanteResponse> transferir(@RequestBody TransferenciaRequest request) {
         return ResponseEntity.ok(transacaoService.transferir(request));
     }
 }

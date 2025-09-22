@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface TransacaoRepository extends MongoRepository<TransacaoEntity, String> {
 
-    List<TransacaoEntity> findByContaOrigemOrContaDestino(String contaOrigem, String contaDestino);
+    List<TransacaoEntity> findByContaOrigemOrContaDestino(Integer contaOrigem, Integer contaDestino);
 }

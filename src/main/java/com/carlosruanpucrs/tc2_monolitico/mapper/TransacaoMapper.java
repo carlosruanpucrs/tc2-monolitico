@@ -1,6 +1,6 @@
 package com.carlosruanpucrs.tc2_monolitico.mapper;
 
-import com.carlosruanpucrs.tc2_monolitico.api.response.TransferenciaResponse;
+import com.carlosruanpucrs.tc2_monolitico.api.response.ComprovanteResponse;
 import com.carlosruanpucrs.tc2_monolitico.enums.TipoMovimentacaoEnum;
 import com.carlosruanpucrs.tc2_monolitico.model.entity.TransacaoEntity;
 
@@ -22,8 +22,8 @@ public class TransacaoMapper {
                 .build();
     }
 
-    public static TransferenciaResponse mapToTransferenciaResponse(String comprovante) {
-        return TransferenciaResponse.builder()
+    public static ComprovanteResponse mapToTransferenciaResponse(String comprovante) {
+        return ComprovanteResponse.builder()
                 .comprovante(comprovante)
                 .build();
     }
