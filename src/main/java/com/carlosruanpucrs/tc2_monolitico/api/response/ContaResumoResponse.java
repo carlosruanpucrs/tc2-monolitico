@@ -1,5 +1,6 @@
 package com.carlosruanpucrs.tc2_monolitico.api.response;
 
+import com.carlosruanpucrs.tc2_monolitico.enums.SituacaoContaEnum;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.experimental.FieldDefaults;
@@ -14,7 +15,7 @@ public class ContaResumoResponse {
     String documentoCliente;
     String nomeCliente;
     Integer numeroConta;
-    String situacao;
+    SituacaoContaEnum situacao;
     LocalDate dataCriacao;
     BigDecimal saldo;
 }

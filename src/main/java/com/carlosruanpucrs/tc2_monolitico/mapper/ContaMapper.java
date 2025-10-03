@@ -19,6 +19,7 @@ public class ContaMapper {
                 .numeroConta(numeroConta)
                 .dataCriacao(LocalDate.now())
                 .saldo(BigDecimal.ZERO)
+                .saldoBloqueado(BigDecimal.ZERO)
                 .situacao(SituacaoContaEnum.ATIVA)
                 .build();
     }

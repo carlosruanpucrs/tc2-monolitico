@@ -21,6 +21,14 @@ public class RabbitConfig {
     public static final String CONTA_QUEUE_BACEN_DLQ = "bacen.conta.queue.dlq";
     public static final String CONTA_ROUTING_KEY_BACEN_DLQ = "bacen.conta.notificacao.dlq";
 
+    public static final String JUD_BLOQUEIO_EXCHANGE = "jud.bloqueio.exchange";
+    public static final String JUD_BLOQUEIO_QUEUE = "jud.bloqueio.fila";
+    public static final String JUD_BLOQUEIO_RK = "jud.bloqueio.rk";
+
+    public static final String JUD_BLOQUEIO_CONFIRMACAO_EXCHANGE = "jud.confirmacao.exchange";
+    public static final String JUD_BLOQUEIO_CONFIRMACAO_QUEUE = "jud.confirmacao.fila";
+    public static final String JUD_BLOQUEIO_CONFIRMACAO_RK = "jud.confirmacao.rk";
+
     @Bean
     public DirectExchange bacenExchange() {
         return new DirectExchange(CONTAEXCHANGE_BACEN);
@@ -56,5 +64,39 @@ public class RabbitConfig {
         return BindingBuilder.bind(bacenDlqQueue)
                 .to(bacenDlxExchange)
                 .with(CONTA_ROUTING_KEY_BACEN_DLQ);
+    }
+
+    @Bean
+    public DirectExchange judBloqueioExchange() {
+        return new DirectExchange(JUD_BLOQUEIO_EXCHANGE);
+    }
+
+    @Bean
+    public Queue judBloqueioQueue() {
+        return new Queue(JUD_BLOQUEIO_QUEUE);
+    }
+
+    @Bean
+    public Binding judBloqueioBinding() {
+        return BindingBuilder.bind(judBloqueioQueue())
+                .to(judBloqueioExchange())
+                .with(JUD_BLOQUEIO_RK);
+    }
+
+    @Bean
+    public DirectExchange judBloqueioConfirmacaoExchange() {
+        return new DirectExchange(JUD_BLOQUEIO_CONFIRMACAO_EXCHANGE);
+    }
+
+    @Bean
+    public Queue judBloqueioConfirmacaoQueue() {
+        return new Queue(JUD_BLOQUEIO_CONFIRMACAO_QUEUE);
+    }
+
+    @Bean
+    public Binding judBloqueioConfirmacaoBinding() {
+        return BindingBuilder.bind(judBloqueioConfirmacaoQueue())
+                .to(judBloqueioConfirmacaoExchange())
+                .with(JUD_BLOQUEIO_CONFIRMACAO_RK);
     }
 }

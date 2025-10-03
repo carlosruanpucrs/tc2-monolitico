@@ -27,6 +27,7 @@ public class ContaEntity {
     SituacaoContaEnum situacao;
     LocalDate dataCriacao;
     BigDecimal saldo;
+    BigDecimal saldoBloqueado;
 
     public void debitar(BigDecimal valor) {
         this.saldo = this.saldo.subtract(valor);
@@ -34,5 +35,10 @@ public class ContaEntity {
 
     public void creditar(BigDecimal valor) {
         this.saldo = this.saldo.add(valor);
+    }
+
+    public void bloquearSaldo(BigDecimal saldo) {
+        this.saldo = this.saldo.subtract(saldo);
+        this.saldoBloqueado = this.saldoBloqueado.add(saldo);
     }
 }
