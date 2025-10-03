@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ContaRepository extends MongoRepository<ContaEntity, Integer> {
     Optional<ContaEntity> findContaEntityByNumeroConta(Integer numeroConta);
-    ContaEntity findContaEntityByDocumentoCliente(String numeroDocumento);
+    Optional<ContaEntity> findContaEntityByDocumentoCliente(String numeroDocumento);
 }

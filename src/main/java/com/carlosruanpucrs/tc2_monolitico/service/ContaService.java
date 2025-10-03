@@ -69,6 +69,11 @@ public class ContaService {
                 .orElseThrow(() -> new ContaNaoEncontradaException(numeroConta));
     }
 
+    public ContaEntity obtemContaPorDocumento(String numeroDocumento) {
+        return contaRepository.findContaEntityByDocumentoCliente(numeroDocumento)
+                .orElseThrow(() -> new DocumentoClienteNaoEncontradoException(numeroDocumento));
+    }
+
     public void atualizarSaldo(ContaEntity contaEntity) {
         contaRepository.save(contaEntity);
     }

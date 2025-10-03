@@ -1,0 +1,20 @@
+package com.carlosruanpucrs.tc2_monolitico.message.event;
+
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.experimental.FieldDefaults;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class JudBloqueioConfirmacaoEvent {
+
+    String idBloqueio;
+    String numeroDocumentoCliente;
+    BigDecimal valorBloqueado;
+    LocalDate dataExecucao;
+    String status;
+    String mensagem;
+}
