@@ -4,6 +4,7 @@ import com.carlosruanpucrs.tc2_monolitico.api.request.ContratacaoContaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.request.TransferenciaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ContaResumoResponse;
 import com.carlosruanpucrs.tc2_monolitico.enums.SituacaoContaEnum;
+import com.carlosruanpucrs.tc2_monolitico.enums.TipoContaEnum;
 import com.carlosruanpucrs.tc2_monolitico.exception.*;
 import com.carlosruanpucrs.tc2_monolitico.mapper.ContaMapper;
 import com.carlosruanpucrs.tc2_monolitico.model.entity.ContaEntity;
@@ -28,11 +29,12 @@ public class ContaService {
 
     public ContaResumoResponse contratarConta(ContratacaoContaRequest request) {
         var numeroConta = gerarNumeroConta();
+        var numeroBeneficio = gerarNumeroBeneficio(request.getTipoConta());
         validarDocumentoClienteExistente(request.getNumeroDocumento());
         validarIdadeCliente(request.getDataNascimentoCliente());
         validarCEP(request.getCep());
 
-        var conta = ContaMapper.mapToContaEntity(request, numeroConta);
+        var conta = ContaMapper.mapToContaEntity(request, numeroConta, numeroBeneficio);
         var contaSalva = contaRepository.insert(conta);
 
         contaBacenService.enviarNotificacaoAberturaConta(contaSalva);
@@ -42,6 +44,10 @@ public class ContaService {
 
     private Integer gerarNumeroConta() {
         return (int) (Math.random() * 29);
+    }
+
+    private Integer gerarNumeroBeneficio(TipoContaEnum tipoConta) {
+        return Objects.equals(TipoContaEnum.CONTA_BENEFICIO, tipoConta) ? gerarNumeroConta() * 2 : null;
     }
 
     private void validarDocumentoClienteExistente(String documentoCliente) {
@@ -78,9 +84,9 @@ public class ContaService {
         contaRepository.save(contaEntity);
     }
 
-    public void validarSaldoConta(TransferenciaRequest request, ContaEntity contaOrigem) {
-        if (contaOrigem.getSaldo().compareTo(request.getValor()) < 0) {
-            throw new SaldoInsuficienteException(request.getContaOrigem());
+    public void validarSaldoConta(BigDecimal valor, ContaEntity contaOrigem) {
+        if (contaOrigem.getSaldo().compareTo(valor) < 0) {
+            throw new SaldoInsuficienteException(contaOrigem.getNumeroConta());
         }
     }
 

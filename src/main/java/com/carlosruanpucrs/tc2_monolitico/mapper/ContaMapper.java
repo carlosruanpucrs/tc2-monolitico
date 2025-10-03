@@ -3,16 +3,18 @@ package com.carlosruanpucrs.tc2_monolitico.mapper;
 import com.carlosruanpucrs.tc2_monolitico.api.request.ContratacaoContaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ContaResumoResponse;
 import com.carlosruanpucrs.tc2_monolitico.enums.SituacaoContaEnum;
+import com.carlosruanpucrs.tc2_monolitico.enums.TipoContaEnum;
 import com.carlosruanpucrs.tc2_monolitico.message.event.ContaNotificacaoBacenEvent;
 import com.carlosruanpucrs.tc2_monolitico.model.entity.ContaEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 public class ContaMapper {
 
-    public static ContaEntity mapToContaEntity(ContratacaoContaRequest request, Integer numeroConta) {
+    public static ContaEntity mapToContaEntity(ContratacaoContaRequest request, Integer numeroConta, Integer numeroBeneficio) {
         return ContaEntity.builder()
                 .documentoCliente(request.getNumeroDocumento())
                 .nomeCliente(request.getNomeCliente())
@@ -21,6 +23,8 @@ public class ContaMapper {
                 .saldo(BigDecimal.ZERO)
                 .saldoBloqueado(BigDecimal.ZERO)
                 .situacao(SituacaoContaEnum.ATIVA)
+                .tipoConta(request.getTipoConta())
+                .numeroBeneficio(numeroBeneficio)
                 .build();
     }
 
