@@ -1,6 +1,7 @@
 package com.carlosruanpucrs.tc2_monolitico.model.entity;
 
 import com.carlosruanpucrs.tc2_monolitico.enums.SituacaoContaEnum;
+import com.carlosruanpucrs.tc2_monolitico.enums.TipoContaEnum;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
@@ -28,6 +29,8 @@ public class ContaEntity {
     LocalDate dataCriacao;
     BigDecimal saldo;
     BigDecimal saldoBloqueado;
+    TipoContaEnum tipoConta;
+    Integer numeroBeneficio;
 
     public void debitar(BigDecimal valor) {
         this.saldo = this.saldo.subtract(valor);

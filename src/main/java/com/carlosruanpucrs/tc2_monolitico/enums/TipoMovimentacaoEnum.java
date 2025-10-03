@@ -11,7 +11,8 @@ import lombok.experimental.FieldDefaults;
 public enum TipoMovimentacaoEnum {
 
     TRANSFERENCIA_INTERNA("TI"),
-    BLOQUEIO_JUD("BJUD");
+    BLOQUEIO_JUD("BJUD"),
+    PAGAMENTO_BENEFICIO_INSS("INSS");
 
     final String descricao;
 }

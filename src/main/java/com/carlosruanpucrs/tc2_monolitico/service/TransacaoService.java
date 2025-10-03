@@ -5,11 +5,14 @@ import com.carlosruanpucrs.tc2_monolitico.api.response.ComprovanteResponse;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ExtratoResponse;
 import com.carlosruanpucrs.tc2_monolitico.mapper.ExtratoMapper;
 import com.carlosruanpucrs.tc2_monolitico.mapper.TransacaoMapper;
+import com.carlosruanpucrs.tc2_monolitico.model.dto.PagamentoInssDto;
+import com.carlosruanpucrs.tc2_monolitico.model.entity.PagamentoInssEntity;
 import com.carlosruanpucrs.tc2_monolitico.repository.TransacaoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import static com.carlosruanpucrs.tc2_monolitico.enums.TipoMovimentacaoEnum.PAGAMENTO_BENEFICIO_INSS;
 import static com.carlosruanpucrs.tc2_monolitico.enums.TipoMovimentacaoEnum.TRANSFERENCIA_INTERNA;
 
 @Slf4j
@@ -24,7 +27,7 @@ public class TransacaoService {
         var contaOrigem = contaService.obtemContaPorNumero(request.getContaOrigem());
         var contaDestino = contaService.obtemContaPorNumero(request.getContaDestino());
 
-        contaService.validarSaldoConta(request, contaOrigem);
+        contaService.validarSaldoConta(request.getValor(), contaOrigem);
         contaService.validarSituacaoContaBloqueada(contaOrigem);
 
         contaOrigem.debitar(request.getValor());
@@ -46,5 +49,18 @@ public class TransacaoService {
         var transacoes = transacaoRepository.findByContaOrigemOrContaDestino(numeroConta, numeroConta);
 
         return ExtratoMapper.mapToExtratoResponse(numeroConta, conta.getSaldo(), transacoes);
+    }
+
+    public void pagarInss(PagamentoInssEntity pagamentoInss) {
+        var conta = contaService.obtemContaPorNumero(pagamentoInss.getNumeroConta());
+
+        contaService.validarSaldoConta(pagamentoInss.getValorPagamento(), conta);
+        contaService.validarSituacaoContaBloqueada(conta);
+
+        conta.creditar(pagamentoInss.getValorPagamento());
+        contaService.atualizarSaldo(conta);
+
+        var transacao = TransacaoMapper.mapToTransacaoEntity(conta.getNumeroConta(), null, pagamentoInss.getValorPagamento(), PAGAMENTO_BENEFICIO_INSS);
+        transacaoRepository.save(transacao);
     }
 }

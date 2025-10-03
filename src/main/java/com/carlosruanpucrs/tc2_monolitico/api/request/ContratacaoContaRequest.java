@@ -1,6 +1,7 @@
 package com.carlosruanpucrs.tc2_monolitico.api.request;
 
 import com.carlosruanpucrs.tc2_monolitico.enums.EstadoEnum;
+import com.carlosruanpucrs.tc2_monolitico.enums.TipoContaEnum;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,6 +13,8 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ContratacaoContaRequest {
 
+    @NonNull
+    TipoContaEnum tipoConta;
     @NonNull
     String numeroDocumento;
     @NonNull
