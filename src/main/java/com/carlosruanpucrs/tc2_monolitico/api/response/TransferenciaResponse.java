@@ -1,6 +1,6 @@
 package com.carlosruanpucrs.tc2_monolitico.api.response;
 
-import com.carlosruanpucrs.tc2_monolitico.enums.OperacaoEnum;
+import com.carlosruanpucrs.tc2_monolitico.enums.OperacaoTransacaoEnum;
 import com.carlosruanpucrs.tc2_monolitico.enums.TipoMovimentacaoEnum;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -17,6 +17,6 @@ public class TransferenciaResponse {
     Integer numeroConta;
     BigDecimal valor;
     LocalDateTime dataHora;
-    OperacaoEnum operacao;
+    OperacaoTransacaoEnum operacao;
     TipoMovimentacaoEnum tipoMovimentacao;
 }

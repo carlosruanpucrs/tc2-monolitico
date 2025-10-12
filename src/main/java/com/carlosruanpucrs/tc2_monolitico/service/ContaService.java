@@ -1,7 +1,6 @@
 package com.carlosruanpucrs.tc2_monolitico.service;
 
 import com.carlosruanpucrs.tc2_monolitico.api.request.ContratacaoContaRequest;
-import com.carlosruanpucrs.tc2_monolitico.api.request.TransferenciaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ContaResumoResponse;
 import com.carlosruanpucrs.tc2_monolitico.enums.SituacaoContaEnum;
 import com.carlosruanpucrs.tc2_monolitico.enums.TipoContaEnum;
