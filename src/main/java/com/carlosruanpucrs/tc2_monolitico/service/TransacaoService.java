@@ -44,8 +44,6 @@ public class TransacaoService {
 
     public ExtratoResponse gerarExtrato(Integer numeroConta) {
         var conta = contaService.obtemContaPorNumero(numeroConta);
-        contaService.validarSituacaoContaBloqueada(conta);
-
         var transacoes = transacaoRepository.findByContaOrigemOrContaDestino(numeroConta, numeroConta);
 
         return ExtratoMapper.mapToExtratoResponse(numeroConta, conta.getSaldo(), transacoes);

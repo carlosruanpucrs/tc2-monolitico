@@ -1,6 +1,5 @@
 package com.carlosruanpucrs.tc2_monolitico.model.entity;
 
-import com.carlosruanpucrs.tc2_monolitico.enums.OperacaoEnum;
 import com.carlosruanpucrs.tc2_monolitico.enums.TipoMovimentacaoEnum;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
