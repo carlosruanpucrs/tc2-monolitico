@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/contas")
+@RequestMapping(path = "/v1/contas", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ContaApi {
 
     private final ContaService contaService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity<ContaResumoResponse> contratarConta(@RequestBody ContratacaoContaRequest request) {
         return ResponseEntity.ok(contaService.contratarConta(request));
     }
