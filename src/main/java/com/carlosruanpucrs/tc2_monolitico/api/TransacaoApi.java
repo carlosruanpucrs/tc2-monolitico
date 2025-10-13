@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/transferencias")
+@RequestMapping(path = "/v1/transferencias", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TransacaoApi {
 
     private final TransacaoService transacaoService;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity<ComprovanteResponse> transferir(@RequestBody TransferenciaRequest request) {
         return ResponseEntity.ok(transacaoService.transferir(request));
     }

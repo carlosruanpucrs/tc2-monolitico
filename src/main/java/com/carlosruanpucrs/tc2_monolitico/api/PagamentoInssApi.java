@@ -14,12 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/pagamentos-inss")
+@RequestMapping(path = "/v1/pagamentos-inss", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PagamentoInssApi {
 
     private final PagamentoInssService pagamentoInssService;
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity<Void> processarLoteInss(@RequestParam("file") MultipartFile file) throws Exception {
         pagamentoInssService.processarLote(file);
         return ResponseEntity.noContent().build();

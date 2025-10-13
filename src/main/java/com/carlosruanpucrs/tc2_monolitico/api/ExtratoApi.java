@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/contas/extrato")
+@RequestMapping(path = "/v1/contas/extrato", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ExtratoApi {
 
     private final TransacaoService transacaoService;
 
-    @GetMapping(path = "/{numeroConta}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/{numeroConta}")
     public ResponseEntity<ExtratoResponse> consultarExtrato(@PathVariable Integer numeroConta) {
         return ResponseEntity.ok(transacaoService.gerarExtrato(numeroConta));
     }
