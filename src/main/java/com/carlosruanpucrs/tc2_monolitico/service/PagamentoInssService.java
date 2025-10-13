@@ -62,6 +62,8 @@ public class PagamentoInssService {
             while (rows.hasNext()) {
                 Row row = rows.next();
 
+                if (linhaEstaVazia(row)) continue;
+
                 Integer numeroConta = getInteger(row.getCell(0));
                 Integer numeroBeneficio = getInteger(row.getCell(1));
                 BigDecimal valor = getBigDecimal(row.getCell(2));
@@ -70,6 +72,7 @@ public class PagamentoInssService {
                 creditos.add(new PagamentoInssDto(numeroConta, numeroBeneficio, valor, dataPagamento));
             }
         }
+
         return creditos;
     }
 
@@ -118,4 +121,18 @@ public class PagamentoInssService {
         return null;
     }
 
+    private boolean linhaEstaVazia(Row row) {
+        if (row == null) return true;
+
+        for (int i = 0; i < 4; i++) {
+            Cell cell = row.getCell(i);
+            if (cell != null && cell.getCellType() != CellType.BLANK) {
+                String cellValue = cell.toString().trim();
+                if (!cellValue.isEmpty()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

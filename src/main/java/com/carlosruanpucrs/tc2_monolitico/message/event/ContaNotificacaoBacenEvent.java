@@ -3,6 +3,7 @@ package com.carlosruanpucrs.tc2_monolitico.message.event;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ContaNotificacaoBacenEvent {
+public class ContaNotificacaoBacenEvent implements Serializable {
 
     String idTransacao;
     Integer numeroConta;

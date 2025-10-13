@@ -16,7 +16,7 @@ public class ExtratoMapper {
 
     public static ExtratoResponse mapToExtratoResponse(Integer numeroConta, BigDecimal saldo, List<TransacaoEntity> transacoes) {
         return ExtratoResponse.builder()
-                .numeroContaOrigem(numeroConta)
+                .conta(numeroConta)
                 .saldo(saldo)
                 .transferencias(mapToTransferenciaResponseList(numeroConta, transacoes))
                 .build();
