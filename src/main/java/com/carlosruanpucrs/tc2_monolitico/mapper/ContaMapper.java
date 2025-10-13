@@ -33,6 +33,7 @@ public class ContaMapper {
                 .documentoCliente(contaEntity.getDocumentoCliente())
                 .nomeCliente(contaEntity.getNomeCliente())
                 .numeroConta(contaEntity.getNumeroConta())
+                .numeroBeneficio(contaEntity.getNumeroBeneficio())
                 .dataCriacao(contaEntity.getDataCriacao())
                 .saldo(contaEntity.getSaldo())
                 .situacao(contaEntity.getSituacao())

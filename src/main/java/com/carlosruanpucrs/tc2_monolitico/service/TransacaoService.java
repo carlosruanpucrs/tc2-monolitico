@@ -52,7 +52,6 @@ public class TransacaoService {
     public void pagarInss(PagamentoInssEntity pagamentoInss) {
         var conta = contaService.obtemContaPorNumero(pagamentoInss.getNumeroConta());
 
-        contaService.validarSaldoConta(pagamentoInss.getValorPagamento(), conta);
         contaService.validarSituacaoContaBloqueada(conta);
 
         conta.creditar(pagamentoInss.getValorPagamento());

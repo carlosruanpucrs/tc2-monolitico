@@ -1,5 +1,16 @@
 spring:
   application:
     name: tc2-monolitico
-  datasource:
-    url: mongodb://user:pass@localhost:27017/monolitco?authSource=admin
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: muser
+      password: mpwd
+      database: monolitico
+      authentication-database: admin
+#  datasource:
+#    url: mongodb://user:pwd@localhost:27017/monolitico?authSource=admin
+  rabbitmq:
+    username: user
+    password: pwd

@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 @Slf4j
@@ -42,7 +43,7 @@ public class ContaService {
     }
 
     private Integer gerarNumeroConta() {
-        return (int) (Math.random() * 29);
+        return new Random().nextInt(99000000);
     }
 
     private Integer gerarNumeroBeneficio(TipoContaEnum tipoConta) {
@@ -51,7 +52,7 @@ public class ContaService {
 
     private void validarDocumentoClienteExistente(String documentoCliente) {
         var account = contaRepository.findContaEntityByDocumentoCliente(documentoCliente);
-        if (Objects.nonNull(account)) {
+        if (account.isPresent()) {
             throw new DocumentoClienteExisteException(documentoCliente);
         }
     }
