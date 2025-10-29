@@ -21,7 +21,7 @@ public class JudService {
     public JudBloqueioConfirmacaoEvent processar(JudBloqueioEvent evento) {
         ContaEntity conta;
         try {
-            conta = contaService.obtemContaPorDocumento(evento.getNumeroDocumentoCliente());
+            conta = contaService.obtemContaPorNumero(evento.getNumeroConta());
         } catch (ContaNaoEncontradaException e) {
             return JudMapper.map(evento, BigDecimal.ZERO, "RECUSADA", e.getMessage());
         }

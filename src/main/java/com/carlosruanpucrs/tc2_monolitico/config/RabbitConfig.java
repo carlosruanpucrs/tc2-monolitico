@@ -13,21 +13,21 @@ import java.util.Map;
 @Configuration
 public class RabbitConfig {
 
-    public static final String CONTAEXCHANGE_BACEN = "bacen.conta.exchange";
-    public static final String CONTA_QUEUE_BACEN = "bacen.conta.queue";
-    public static final String CONTA_ROUTING_KEY_BACEN = "conta";
+    public static final String CONTAEXCHANGE_BACEN = "ccs.conta.abertura.exchange";
+    public static final String CONTA_QUEUE_BACEN = "ccs.conta.abertura.queue";
+    public static final String CONTA_ROUTING_KEY_BACEN = "abertura";
 
     public static final String CONTA_EXCHANGE_BACEN_DLX = "bacen.conta.exchange.dlx";
     public static final String CONTA_QUEUE_BACEN_DLQ = "bacen.conta.queue.dlq";
     public static final String CONTA_ROUTING_KEY_BACEN_DLQ = "bacen.conta.notificacao.dlq";
 
     public static final String JUD_BLOQUEIO_EXCHANGE = "jud.bloqueio.exchange";
-    public static final String JUD_BLOQUEIO_QUEUE = "jud.bloqueio.fila";
+    public static final String JUD_BLOQUEIO_QUEUE = "jud.bloqueio.queue";
     public static final String JUD_BLOQUEIO_RK = "jud.bloqueio.rk";
 
-    public static final String JUD_BLOQUEIO_CONFIRMACAO_EXCHANGE = "jud.confirmacao.exchange";
-    public static final String JUD_BLOQUEIO_CONFIRMACAO_QUEUE = "jud.confirmacao.fila";
-    public static final String JUD_BLOQUEIO_CONFIRMACAO_RK = "jud.confirmacao.rk";
+    public static final String JUD_BLOQUEIO_CONFIRMACAO_EXCHANGE = "jud.bloqueio.confirmacao.exchange";
+    public static final String JUD_BLOQUEIO_CONFIRMACAO_QUEUE = "jud.bloqueio.confirmacao.queue";
+    public static final String JUD_BLOQUEIO_CONFIRMACAO_RK = "jud.bloqueio.confirmacao.rk";
 
     @Bean
     public DirectExchange bacenExchange() {
