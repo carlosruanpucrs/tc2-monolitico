@@ -25,4 +25,5 @@ public class PagamentoInssEntity {
     LocalDate dataPagamento;
     BigDecimal valorPagamento;
     SituacaoPagamentoInssEnum situacao;
+    String comprovantePagamento;
 }

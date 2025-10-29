@@ -3,9 +3,10 @@ package com.carlosruanpucrs.tc2_monolitico.service;
 import com.carlosruanpucrs.tc2_monolitico.api.request.TransferenciaRequest;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ComprovanteResponse;
 import com.carlosruanpucrs.tc2_monolitico.api.response.ExtratoResponse;
+import com.carlosruanpucrs.tc2_monolitico.enums.SituacaoPagamentoInssEnum;
 import com.carlosruanpucrs.tc2_monolitico.mapper.ExtratoMapper;
+import com.carlosruanpucrs.tc2_monolitico.mapper.InssMapper;
 import com.carlosruanpucrs.tc2_monolitico.mapper.TransacaoMapper;
-import com.carlosruanpucrs.tc2_monolitico.model.dto.PagamentoInssDto;
 import com.carlosruanpucrs.tc2_monolitico.model.entity.PagamentoInssEntity;
 import com.carlosruanpucrs.tc2_monolitico.repository.TransacaoRepository;
 import lombok.RequiredArgsConstructor;
@@ -49,15 +50,20 @@ public class TransacaoService {
         return ExtratoMapper.mapToExtratoResponse(numeroConta, conta.getSaldo(), transacoes);
     }
 
-    public void pagarInss(PagamentoInssEntity pagamentoInss) {
-        var conta = contaService.obtemContaPorNumero(pagamentoInss.getNumeroConta());
+    public PagamentoInssEntity pagarInss(PagamentoInssEntity pagamentoInss) {
+        try {
+            var conta = contaService.obtemContaPorNumero(pagamentoInss.getNumeroConta());
 
-        contaService.validarSituacaoContaBloqueada(conta);
+            contaService.validarSituacaoContaBloqueada(conta);
 
-        conta.creditar(pagamentoInss.getValorPagamento());
-        contaService.atualizarSaldo(conta);
+            conta.creditar(pagamentoInss.getValorPagamento());
+            contaService.atualizarSaldo(conta);
 
-        var transacao = TransacaoMapper.mapToTransacaoEntity(conta.getNumeroConta(), null, pagamentoInss.getValorPagamento(), PAGAMENTO_BENEFICIO_INSS);
-        transacaoRepository.save(transacao);
+            var transacao = TransacaoMapper.mapToTransacaoEntity(conta.getNumeroConta(), null, pagamentoInss.getValorPagamento(), PAGAMENTO_BENEFICIO_INSS);
+            transacaoRepository.save(transacao);
+            return InssMapper.mapToPagamentoInssEntity(pagamentoInss, transacao.getComprovante(), SituacaoPagamentoInssEnum.PAGO);
+        } catch (Exception e) {
+            return InssMapper.mapToPagamentoInssEntity(pagamentoInss, null, SituacaoPagamentoInssEnum.INCONSISTIDO);
+        }
     }
 }

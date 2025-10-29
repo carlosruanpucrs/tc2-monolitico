@@ -13,10 +13,11 @@ public class JudMapper {
         return JudBloqueioConfirmacaoEvent.builder()
                 .idBloqueio(evento.getIdBloqueio())
                 .numeroDocumentoCliente(evento.getNumeroDocumentoCliente())
+                .numeroConta(evento.getNumeroConta())
                 .dataExecucao(LocalDate.now())
                 .status(status)
                 .mensagem(mensagem)
-                .valorBloqueado(Objects.equals("CONFIRMADA", status) ? evento.getValorBloqueado() : BigDecimal.ZERO)
+                .valorBloqueado(Objects.equals("CONFIRMADA", status) ? valorBloqueado : BigDecimal.ZERO)
                 .build();
     }
 }

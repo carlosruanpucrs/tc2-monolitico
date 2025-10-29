@@ -13,6 +13,7 @@ public class JudBloqueioConfirmacaoEvent {
 
     String idBloqueio;
     String numeroDocumentoCliente;
+    Integer numeroConta;
     BigDecimal valorBloqueado;
     LocalDate dataExecucao;
     String status;

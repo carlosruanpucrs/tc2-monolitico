@@ -17,6 +17,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +37,10 @@ public class PagamentoInssService {
 
     private void pagarInss() {
         pagamentoInssRepository.findAllBySituacaoIs(SituacaoPagamentoInssEnum.PENDENTE)
-                .forEach(transacaoService::pagarInss);
+                .stream()
+                .map(transacaoService::pagarInss)
+                .filter(Objects::nonNull)
+                .forEach(pagamentoInssRepository::save);
     }
 
     private void registrarPagamentoInss(PagamentoInssDto pagamentoInss) {
@@ -69,7 +73,12 @@ public class PagamentoInssService {
                 BigDecimal valor = getBigDecimal(row.getCell(2));
                 LocalDate dataPagamento = getLocalDate(row.getCell(3));
 
-                creditos.add(new PagamentoInssDto(numeroConta, numeroBeneficio, valor, dataPagamento));
+                creditos.add(PagamentoInssDto.builder()
+                        .numeroBeneficio(numeroBeneficio)
+                        .numeroConta(numeroConta)
+                        .valor(valor)
+                        .dataPagamento(dataPagamento)
+                        .build());
             }
         }
 

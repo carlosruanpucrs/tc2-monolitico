@@ -18,6 +18,7 @@ public class JudBloqueioEvent implements Serializable {
 
     String idBloqueio;
     String numeroDocumentoCliente;
+    Integer numeroConta;
     BigDecimal valorBloqueado;
     LocalDate dataEmissao;
 }
