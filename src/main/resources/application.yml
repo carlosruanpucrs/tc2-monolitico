@@ -3,14 +3,9 @@ spring:
     name: tc2-monolitico
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      username: muser
-      password: mpwd
-      database: monolitico
-      authentication-database: admin
-#  datasource:
-#    url: mongodb://user:pwd@localhost:27017/monolitico?authSource=admin
+      uri: mongodb+srv://admin:admin@monolitico.axf2whd.mongodb.net/monolitico?authSource=admin
   rabbitmq:
-    username: user
-    password: pwd
+    host: gorilla-01.lmq.cloudamqp.com
+    username: fwvxmear
+    virtual_host: fwvxmear
+    password: Gq1ORWwgNe2ZaBtLPptdLtT38SRNG_xl

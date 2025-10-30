@@ -1,6 +1,5 @@
-package com.carlosruanpucrs.tc2_monolitico.exception;
+package com.carlosruanpucrs.tc2_monolitico.exception.handler;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
