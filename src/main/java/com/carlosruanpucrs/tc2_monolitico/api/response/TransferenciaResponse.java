@@ -2,6 +2,7 @@ package com.carlosruanpucrs.tc2_monolitico.api.response;
 
 import com.carlosruanpucrs.tc2_monolitico.enums.OperacaoTransacaoEnum;
 import com.carlosruanpucrs.tc2_monolitico.enums.TipoMovimentacaoEnum;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TransferenciaResponse {
 
     String comprovante;

@@ -16,7 +16,7 @@ public class ContaBacenProducer {
 
     public void enviar(ContaNotificacaoBacenEvent evento) {
         try {
-            log.info("[RABBITMQ] Enviando notificacao abertua conta ao bacen, payload: {}", evento);
+            log.info("[RABBITMQ] Enviando notificacao abertura conta ao bacen, payload: {}", evento);
 
             rabbitTemplate.convertAndSend(
                     RabbitConfig.CONTAEXCHANGE_BACEN,
@@ -24,7 +24,7 @@ public class ContaBacenProducer {
                     evento
             );
 
-            log.info("[RABBITMQ] Notificacao abertua conta ao bacen enviada com sucesso, payload: {}", evento);
+            log.info("[RABBITMQ] Notificacao abertura conta ao bacen enviada com sucesso, payload: {}", evento);
         } catch (RuntimeException e) {
             log.error("[RABBITMQ] Erro ao notificar abertura de conta ao bacen, erro: {}", e.getMessage());
             throw e;
