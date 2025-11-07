@@ -56,19 +56,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(simpleError, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    @ExceptionHandler(ContaExisteException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ResponseEntity<SimpleError> handleContaExisteException(ContaExisteException ex) {
-        var simpleError = SimpleError.builder()
-                .error(HttpStatus.CONFLICT.getReasonPhrase())
-                .status(HttpStatus.CONFLICT.value())
-                .message(ex.getMessage())
-                .timestamp(LocalDateTime.now())
-                .build();
-
-        return new ResponseEntity<>(simpleError, HttpStatus.CONFLICT);
-    }
-
     @ExceptionHandler(ContaNaoEncontradaException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<SimpleError> handleContaNaoEncontradaException(ContaNaoEncontradaException ex) {
@@ -110,7 +97,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MenorIdadeException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<SimpleError> handleMenorIdadeException(DocumentoClienteNaoEncontradoException ex) {
+    public ResponseEntity<SimpleError> handleMenorIdadeException(MenorIdadeException ex) {
         var simpleError = SimpleError.builder()
                 .error(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase())
                 .status(HttpStatus.UNPROCESSABLE_ENTITY.value())
