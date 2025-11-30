@@ -9,7 +9,7 @@ COPY . .
 RUN chmod +x gradlew
 RUN ./gradlew clean build -x test
 
-FROM openjdk:21
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
