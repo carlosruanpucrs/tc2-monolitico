@@ -1,14 +1,16 @@
 spring:
+#  profiles:
+#    active: local
   application:
     name: tc2-monolitico
   data:
     mongodb:
-      uri: mongodb+srv://admin:admin@monolitico.axf2whd.mongodb.net/monolitico?authSource=admin
+      uri: mongodb+srv://${MONGO_USER}:${MONGO_PWD}@${MONGO_HOST}/${MONGO_DB}?authSource=admin
   rabbitmq:
-    host: gorilla-01.lmq.cloudamqp.com
-    username: fwvxmear
-    virtual_host: fwvxmear
-    password: Gq1ORWwgNe2ZaBtLPptdLtT38SRNG_xl
+    host: ${RABBITMQ_HOST}
+    username: ${RABBITMQ_USER}
+    virtual_host: ${RABBITMQ_VH}
+    password: ${RABBITMQ_PWD}
 
 management:
   endpoints:

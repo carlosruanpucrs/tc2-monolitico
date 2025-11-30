@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: tc2-monolitico
+  data:
+    mongodb:
+      uri: mongodb+srv://mongouser:mongopwd@localhost:27017/test?authSource=admin
+  rabbitmq:
+    host: localhost
+    username: user
+    virtual_host: /
+    password: pwd
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
